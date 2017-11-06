@@ -1,0 +1,31 @@
+<h2 class="text-center">Video List</h2>
+
+<!-- slider directive -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>Name</td>
+                        <td>URL</td>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    <tr ng-repeat="video in main.ovocie">
+                        <td>{{video.id}}</td>
+                        <td>{{video.name}}</td>
+                        <td>{{video.url}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+
+
