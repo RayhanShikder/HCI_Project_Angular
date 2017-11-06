@@ -18,6 +18,8 @@
   angular
     .module('boilerplate', [
       'ngRoute'
+      //,
+      // 'ui-router'
     ])
     .config(config);
 
@@ -36,7 +38,7 @@
 
     $locationProvider.html5Mode(false);
 
-    // routes
+    //routes
     $routeProvider
       .when('/', {
         templateUrl: 'views/home.html',
@@ -53,9 +55,15 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
+      .when('/singleVideo/:id', {
+        templateUrl: 'views/singleVideo.html',
+        controller: 'singleVideoController',
+        controllerAs: 'main'
+      })
       .otherwise({
         redirectTo: '/'
       });
+
 
     $httpProvider.interceptors.push('authInterceptor');
 
