@@ -6,7 +6,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered">
+        
+             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <td>id</td>
@@ -16,14 +17,19 @@
                     
                 </thead>
                 <tbody>
-                    <tr ng-repeat="video in main.ovocie">
+                    <div>
+                        <tr ng-repeat="video in main.ovocie">
                         <td>{{video.id}}</td>
                         <td>{{video.name}}</td>
-                        <td><a ng-href="#/singleVideo/59ffbc081a22b8372a9fca4a">{{video.url}}</a></td>
-                        <!-- <td><a ng-href="#/singleVideo/{{id}}">{{video.url}}</a></td> -->
-                    </tr>
+                        <!-- <td><a ng-href="#/singleVideo/59ffbc081a22b8372a9fca4a">{{video.url}}</a></td> -->
+                        <td><a ng-href="#/singleVideo/{{video.url}}">{{video.url}}</a></td>
+                        </tr>
+                    </div>
+                    
+                   
+
                 </tbody>
-            </table>
+            </table> 
         </div>
         
     </div>

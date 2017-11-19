@@ -1,0 +1,8 @@
+.player {
+  text-align: center;
+  margin-top: 5rem;
+}
+.player .videoId {
+  width: 30%;
+  margin: auto;
+}

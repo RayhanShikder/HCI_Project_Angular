@@ -1,0 +1,30 @@
+{
+  "name": "ng-youtube-embed-iframe",
+  "description": "The AngularJS directive for youtube-iframe-player-api",
+  "main": "",
+  "authors": [
+    "Sibiraj"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "youtube",
+    "iframe-api",
+    "ng-youtube",
+    "angular-youtube-iframe",
+    "ng-youtube-embed-iframe",
+    "youtube-iframe-api",
+    "youtube-embed"
+  ],
+  "homepage": "https://github.com/Sibiraj-S/ng-youtube-embed-iframe",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": ">=1.6.0",
+    "angular-sanitize": ">=1.6.0"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "_from": "ng-youtube-embed-iframe",
+  "_id": "ng-youtube-embed-iframe@1.2.1",
+  "_inBundle": false,
+  "_integrity": "sha512-o4gqn6JeDQSZCQNKfCmWYmrL1GFIczUFeo8Vq6BJ50r3EqgfaQFlu3GZPKIPxD2g0TidLrdxvddxru9eiNPUyQ==",
+  "_location": "/ng-youtube-embed-iframe",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ng-youtube-embed-iframe",
+    "name": "ng-youtube-embed-iframe",
+    "escapedName": "ng-youtube-embed-iframe",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ng-youtube-embed-iframe/-/ng-youtube-embed-iframe-1.2.1.tgz",
+  "_shasum": "bade0cdcd9b13f0c20a69007ee43111f2c61820e",
+  "_spec": "ng-youtube-embed-iframe",
+  "_where": "/Users/rayhanshikder/Documents/projects/angular/HCI_Project_Angular",
+  "author": {
+    "name": "Sibiraj"
+  },
+  "bugs": {
+    "url": "https://github.com/Sibiraj-S/ng-youtube-embed-iframe/issues"
+  },
+  "bundleDependencies": false,
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "angular": ">=1.6.6",
+    "angular-sanitize": ">=1.6.6"
+  },
+  "deprecated": false,
+  "description": "The AngularJS directive for youtube-iframe-player-api",
+  "devDependencies": {
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
+    "delete-empty": "^1.0.1",
+    "grunt": "^1.0.1",
+    "grunt-coffeelint": "^0.0.16",
+    "grunt-contrib-coffee": "^2.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^3.1.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-ng-annotate": "^3.0.0",
+    "husky": "^0.14.3",
+    "load-grunt-tasks": "^3.5.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "homepage": "https://github.com/Sibiraj-S/ng-youtube-embed-iframe#readme",
+  "keywords": [
+    "youtube",
+    "iframe-api",
+    "ng-youtube",
+    "angular-youtube-iframe",
+    "ng-youtube-embed-iframe",
+    "youtube-iframe-api",
+    "youtube-embed"
+  ],
+  "license": "MIT",
+  "name": "ng-youtube-embed-iframe",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sibiraj-S/ng-youtube-embed-iframe.git"
+  },
+  "scripts": {
+    "build": "grunt dist",
+    "cz": "git-cz",
+    "develop": "grunt develop",
+    "precommit": "yarn test",
+    "start": "grunt webserver",
+    "test": "grunt coffeelint",
+    "watch": "grunt watch"
+  },
+  "version": "1.2.1"
+}

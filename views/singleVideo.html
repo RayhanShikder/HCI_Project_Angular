@@ -1,1 +1,21 @@
-Single Video
+<div ng-controller="singleVideoController">
+<div class="ytplayers" style="height:300px;">
+            <youtube  player-options="options" id="myYoutubePlayer"></youtube> 
+        </div>
+
+<div>
+	<button ng-click="pauseVideo()">Pause</button>
+	<button ng-click="playVideo()">Play</button>
+	{{showQuestionDivFlag}}
+</div>
+<div ng-if="showQuestionDivFlag"> 
+	Questions
+	<button ng-click="submitAnswer()">Submit</button>
+</div>
+
+</div>
+<!-- <style type="text/css">
+	.ytplayers {
+pointer-events: none;
+}
+</style> -->

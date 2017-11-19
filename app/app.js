@@ -17,7 +17,7 @@
    */
   angular
     .module('boilerplate', [
-      'ngRoute'
+      'ngRoute','ngYoutube'
       //,
       // 'ui-router'
     ])
@@ -57,8 +57,8 @@
       })
       .when('/singleVideo/:id', {
         templateUrl: 'views/singleVideo.html',
-        controller: 'singleVideoController',
-        controllerAs: 'main'
+        // controller: 'singleVideoController',
+        // controllerAs: 'main'
       })
       .otherwise({
         redirectTo: '/'
