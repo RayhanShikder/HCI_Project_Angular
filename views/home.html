@@ -12,7 +12,7 @@
                     <tr>
                         <td>id</td>
                         <td>Name</td>
-                        <td>URL</td>
+                        <!-- <td>URL</td> -->
                     </tr>
                     
                 </thead>
@@ -20,9 +20,9 @@
                     <div>
                         <tr ng-repeat="video in main.ovocie">
                         <td>{{video.id}}</td>
-                        <td>{{video.name}}</td>
+                        <td><a ng-href="#/singleVideo/{{video.url}}/{{video._id}}">{{video.name}}</a></td>
                         <!-- <td><a ng-href="#/singleVideo/59ffbc081a22b8372a9fca4a">{{video.url}}</a></td> -->
-                        <td><a ng-href="#/singleVideo/{{video.url}}">{{video.url}}</a></td>
+                        <!-- <td><a ng-href="#/singleVideo/{{video.url}}/{{video._id}}">{{video.url}}</a></td> -->
                         </tr>
                     </div>
                     

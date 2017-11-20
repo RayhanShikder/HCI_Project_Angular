@@ -1,17 +1,139 @@
 <div ng-controller="singleVideoController">
-<div class="ytplayers" style="height:300px;">
-            <youtube  player-options="options" id="myYoutubePlayer"></youtube> 
-        </div>
+<h3 class="text-center">VidSplit</h3>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
 
-<div>
-	<button ng-click="pauseVideo()">Pause</button>
-	<button ng-click="playVideo()">Play</button>
-	{{showQuestionDivFlag}}
+		</div>
+		<div class="col-md-8 ytplayers" >
+            <div style="height:300px;">
+            	<youtube  player-options="options" id="myYoutubePlayer"></youtube> 
+            </div>
+            <!-- <br> -->
+            <div class="text-center">
+				<!-- <button ng-click="pauseVideo()">Pause</button> -->
+				<!-- <button ng-click="playVideo()">Play</button> -->
+				<!-- {{showQuestionDivFlag}} -->
+			</div>
+    	</div>
+	</div>
 </div>
-<div ng-if="showQuestionDivFlag"> 
-	Questions
-	<button ng-click="submitAnswer()">Submit</button>
+<br>
+
+
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 text-center" ng-if="showQuestionDivFlag" style="border-style: inset;
+    border-width: 1px;"> 
+    	<br>
+		<div>
+			<strong> Do you agree with the following statement?</strong>
+			<p>{{currentQuestion.selectName}} {{currentQuestion.selectType}} has beeen selected to {{currentQuestion.commentDescription}}</p>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<form name="myForm" class="text-center" >
+				  <label>
+				    <input type="radio" ng-model="answer.type" value="Yes">
+				    Yes
+				  </label>
+				  &nbsp;
+				  <label>
+				    <input type="radio" ng-model="answer.type" value="No">
+				    No
+				  </label>
+				  &nbsp;
+				  <label>
+				    <input type="radio" ng-model="answer.type" value="Neutral">
+				    Neutral
+				  </label>
+				  
+				 </form>
+			</div>
+		</div>
+		<br>
+		<div class="row" ng-if="answer.type=='No' && !agreedFlag">
+			<p>Do you want to provide a better answer? <a href="" ng-click="setAgreed()">Yes</a></p>
+
+		</div>
+		<div class="row" ng-if="answer.type=='No' && agreedFlag">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-10 form-group">
+				<div class="row">
+					<div class="col-md-3 text-right">
+						<strong>Selection Type:</strong>
+					</div>
+					<div class="col-md-6 ">
+						<select class="form-control" id="sel1" ng-model="selectedSelection">
+						    <option value="Button">Button</option>
+						    <option value="Menu Item">Menu Item</option>
+						    <option value="Radio">Radio</option>
+						    <option value="Check List">Check List</option>
+						    <option value="Combo">Combo</option>
+						    <option value="Tab">Tab</option>
+						  </select>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-3 text-right">
+						<strong>Selection Name:</strong>
+					</div>
+					<div class="col-md-6">
+						<input class="form-control" type="text" name="">
+					</div>
+					
+				</div>
+
+				<div class="row">
+					<div class="col-md-3 text-right">
+						<strong>Comment Type:</strong>
+					</div>
+					<div class="col-md-6 ">
+						<select class="form-control" id="sel1" ng-model="selectedCommentType">
+						    <option value="Button">Button</option>
+						    <option value="Menu Item">Menu Item</option>
+						    <option value="Radio">Radio</option>
+						    <option value="Check List">Check List</option>
+						    <option value="Combo">Combo</option>
+						    <option value="Tab">Tab</option>
+						  </select>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-3 text-right">
+						<strong>Comment Description:</strong>
+					</div>
+					<div class="col-md-6">
+						<textarea rows="4" class="form-control"></textarea>
+					</div>
+					
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-3 text-right">
+						<strong>Time(seconds):</strong>
+					</div>
+					<div class="col-md-6">
+						<input type="number" name="">
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div>
+			<button class="btn btn-sm btn-success" ng-click="submitAnswer()" ng-disabled="answer.type==''">Submit</button>
+			<button class="btn btn-sm btn-primary" ng-click="skipAnswer()">Skip</button>
+		</div>
+		<br/>
+	</div>
+	<br>
 </div>
+
 
 </div>
 <!-- <style type="text/css">

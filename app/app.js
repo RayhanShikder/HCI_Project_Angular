@@ -55,7 +55,7 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
-      .when('/singleVideo/:id', {
+      .when('/singleVideo/:id/:videoId', {
         templateUrl: 'views/singleVideo.html',
         // controller: 'singleVideoController',
         // controllerAs: 'main'
