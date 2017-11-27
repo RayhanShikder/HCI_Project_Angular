@@ -23,7 +23,28 @@ var gulp            = require('gulp'),
     $               = require('gulp-load-plugins')(),
     del             = require('del'),
     runSequence     = require('run-sequence');
+    connect         = require('gulp-clean');
 
+
+var PATH ={
+  DIST : './_build/',
+  CSS: [
+    './styles/*.css'
+  ],
+  IMG: [
+    'src/img/**'
+  ],
+  JS: [
+    './app/**/*.js',
+    './app/**/*.js',
+    './js/*.js'
+  ],
+  HTML: [
+    './*.html',
+    './views/**/*.html',
+    './views/*.html'
+  ]
+};
 
 // optimize images
 gulp.task('images', function() {
@@ -268,3 +289,20 @@ gulp.task('build', function(callback) {
     'build:size',
     callback);
 });
+
+gulp.task('css', function () {
+  gulp.src(path.CSS)
+    .pipe(gulp.dest(path.DIST + '/css'));
+});
+gulp.task('html', function () {
+  gulp.src(path.HTML, {base: 'src'})
+    .pipe(gulp.dest(path.DIST));
+});
+
+
+gulp.task('clean', function() {
+  return gulp.src('./_build/*', {force: true})
+    .pipe(clean());
+});
+
+

@@ -55,10 +55,20 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
-      .when('/singleVideo/:id/:videoId', {
-        templateUrl: 'views/singleVideo.html',
-        // controller: 'singleVideoController',
-        // controllerAs: 'main'
+      .when('/parent_phase/:id/:videoId/:phase/:condition', {
+        templateUrl: 'views/parent_phase.html'
+      })
+      .when('/Quant/:type/:videoId/:phase', {
+        templateUrl: 'views/phase1QuestionQuant.html',
+      })
+      .when('/Qual/:type/:videoId/:phase', {
+        templateUrl: 'views/phase1QuestionQual.html'
+      })
+      .when('/phase2/:youtubeId/:videoId/:phase', {
+        templateUrl: 'views/phase2.html'
+      })
+      .when('/final_page', {
+        templateUrl: 'views/final_page.html'
       })
       .otherwise({
         redirectTo: '/'

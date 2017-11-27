@@ -6,7 +6,92 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-        
+            
+            <div class="row">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8">
+                    <form ng-submit="main.createUser()">
+                        <div class="row">
+                            <div class="col-md-4 text-right" style="padding-top:5px;">
+                                <strong >Age:</strong>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" type="number" name="" ng-model="main.user.age" required="">
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-md-4 text-right" style="padding-top:5px;">
+                                <strong >Sex:</strong>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" id="sel1" ng-model="main.user.sex" required="">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                              </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4 text-right" style="padding-top:5px;">
+                                <strong >Profession:</strong>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" id="sel1" ng-model="main.user.profession" required="">
+                                    <option value="Student">Student</option>
+                                    <option value="Engineer">Engineer</option>
+                              </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4 text-right" style="padding-top:5px;">
+                                <strong >Degree Achived:</strong>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" id="sel1" ng-model="main.user.highestDegreeAchieved" required="">
+                                    <option value="Bachelor">Bachelor</option>
+                                    <option value="Masters">Masters</option>
+                              </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4 text-right" style="padding-top:5px;">
+                                <strong >Major:</strong>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" id="sel1" ng-model="main.user.major" required="">
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                              </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4 text-right" style="padding-top:5px;">
+                                <strong >Machine Learning Knowledge:</strong>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" id="sel1" ng-model="main.user.macchinLearningKnowledgeLevel" required="">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Excellent">Excellent</option>
+                              </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-primary" type="submit">Next</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+            <br><br>
              <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -20,7 +105,7 @@
                     <div>
                         <tr ng-repeat="video in main.ovocie">
                         <td>{{video.id}}</td>
-                        <td><a ng-href="#/singleVideo/{{video.url}}/{{video._id}}">{{video.name}}</a></td>
+                        <td><a ng-href="#/parent_phase/{{video.url}}/{{video._id}}/phase1/vidSplit">{{video.name}}</a></td>
                         <!-- <td><a ng-href="#/singleVideo/59ffbc081a22b8372a9fca4a">{{video.url}}</a></td> -->
                         <!-- <td><a ng-href="#/singleVideo/{{video.url}}/{{video._id}}">{{video.url}}</a></td> -->
                         </tr>
