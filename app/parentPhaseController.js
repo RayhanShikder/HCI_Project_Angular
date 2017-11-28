@@ -11,10 +11,10 @@
     .module('boilerplate')
     .controller('parentPhaseController', parentPhaseController);
 
-  parentPhaseController.$inject = ['LocalStorage', 'QueryService','$routeParams','$scope','ytPlayer','$location'];
+  parentPhaseController.$inject = ['LocalStorage', 'QueryService','$routeParams','$scope','ytPlayer','$location','$window'];
 
 
-  function parentPhaseController(LocalStorage, QueryService,$routeParams,$scope,ytPlayer,$location) {
+  function parentPhaseController(LocalStorage, QueryService,$routeParams,$scope,ytPlayer,$location,$window) {
    
     // 'controller as' syntax
     var self = this;
@@ -22,10 +22,13 @@
     console.log($routeParams.id);
     $scope.showQuestionDivFlag = false;
     var currentQuestionTime;
-    var crowdEntriesOfAVideo;
+    var questionsOfAVideo;
     $scope.selectedSelection = "Tab";
     $scope.agreedFlag = false;
-
+    $scope.condition='';
+    $scope.learnerSourceQuestionAnswer = {
+      answer:''
+    };
     // var timeFlags = [ //later save it in localstorage
     //   {
     //     "time":12,
@@ -74,27 +77,27 @@
     });
 
     var alreadyShown = function(time){
-      for(var i=0;i<crowdEntriesOfAVideo.length;i++){
-        if(Math.floor(time)==crowdEntriesOfAVideo[i].time){
-          return crowdEntriesOfAVideo[i].flag;
+      for(var i=0;i<questionsOfAVideo.length;i++){
+        if(Math.floor(time)==questionsOfAVideo[i].time){
+          return questionsOfAVideo[i].flag;
         }
       }
       return true;
     };
     var setShownFlag = function(time){
-      for(var i=0;i<crowdEntriesOfAVideo.length;i++)
+      for(var i=0;i<questionsOfAVideo.length;i++)
       {
-        if(Math.floor(time)==crowdEntriesOfAVideo[i].time){
-          crowdEntriesOfAVideo[i].flag=true;
+        if(Math.floor(time)==questionsOfAVideo[i].time){
+          questionsOfAVideo[i].flag=true;
           return;
         }
       }
       return;
     };
     var getCurrentQuestion = function(time){
-      for(var i=0;i<crowdEntriesOfAVideo.length;i++){
-        if(time == crowdEntriesOfAVideo[i].time){
-          return crowdEntriesOfAVideo[i];
+      for(var i=0;i<questionsOfAVideo.length;i++){
+        if(time == questionsOfAVideo[i].time){
+          return questionsOfAVideo[i];
         }
       }
       return ;
@@ -113,10 +116,18 @@
       $scope.showQuestionDivFlag = false;
       setShownFlag(currentQuestionTime);
       $scope.seekToVideo(currentQuestionTime); 
-      updateVerification($scope.currentQuestion,$scope.answer.type);
-      $scope.answer = {
+      if($routeParams.condition == 'vidSplit'){
+        updateVerification($scope.currentQuestion,$scope.answer.type);
+        $scope.answer = {
         type: ''
       };
+      }
+      else if($routeParams.condition == 'learnerSource'){
+        submitLearnerSourceAnswer($scope.currentQuestion,$scope.learnerSourceQuestionAnswer.answer);
+        $scope.learnerSourceQuestionAnswer.answer = '';
+      }
+      
+      
     };
     $scope.skipAnswer = function(){
       $scope.showQuestionDivFlag = false;
@@ -196,11 +207,12 @@
         crowdEntryId: data._id,
         positive: 0,
         negative: 0,
-        neutral: 0
+        neutral: 0,
+        contributor:$window.localStorage['user_id']
       };
       
 
-      QueryService.query('GET', 'verifications/'+data.videoId+'/'+data._id+'/_turker', {}, {})
+      QueryService.query('GET', 'verifications/'+data.videoId+'/'+data._id+'/'+$window.localStorage['user_id'], {}, {})
       .then(function(ovocie) {
         if(ovocie.data.length>0){
           param = ovocie.data[0];
@@ -211,15 +223,18 @@
 
         if(answer == 'Yes')
         {
-          param.positive = param.positive+1;
+          // param.positive = param.positive+1;
+          param.positive = 1;
         }
         else if(answer == 'No')
         {
-          param.negative = param.negative+1;
+          // param.negative = param.negative+1;
+          param.negative = 1;
         }
         else if(answer == 'Neutral')
         {
-          param.neutral = param.neutral+1;
+          // param.neutral = param.neutral+1;
+          param.neutral = 1;
         }
 
         if(ovocie.data.length>0){//updating an existing entry
@@ -243,6 +258,40 @@
 
     };
 
+    var submitLearnerSourceAnswer = function(data,answer){
+      let param = {
+        video_id: data.video_id,
+        question_id: data._id,
+        answer: answer,
+        contributor:$window.localStorage['user_id']
+      };
+
+      console.log('param is:');
+      console.log(param);
+      console.log(answer);
+
+      QueryService.query('GET', 'learnerSourceAnswers/'+data.video_id+'/'+data._id+'/'+$window.localStorage['user_id'], {}, {})
+      .then(function(ovocie) {
+        if(ovocie.data.length>0){//updating an existing entry
+          param._id=ovocie.data[0]._id;
+          QueryService.query('PUT', 'learnerSourceAnswers/'+param._id, {}, param)
+          .then(function(resp) {
+            console.log('response is');
+            console.log(resp);
+          });
+        }
+        else{//creating a new entry in verifications
+            QueryService.query('POST', 'learnerSourceAnswers', {}, param)
+              .then(function(resp) {
+                console.log('response is');
+                console.log(resp);
+              });
+        }
+
+         
+      });
+    };
+
     $scope.goToQuant = function(){
       $location.path('/Quant/vidSplit/adsasdlkjfas/'+$routeParams.phase)
     };
@@ -255,12 +304,25 @@
      * Load some data
      * @return {Object} Returned object
      */
-    QueryService.query('GET', 'getcrowdEntriesOfAVideo/'+$routeParams.videoId, {}, {})
+     if($routeParams.condition=='vidSplit'){
+      $scope.condition = 'vidSplit';
+      QueryService.query('GET', 'getCrowdEntriesOfAVideo/'+$routeParams.videoId, {}, {})
       .then(function(ovocie) {
-        crowdEntriesOfAVideo = ovocie.data;
+        questionsOfAVideo = ovocie.data;
         console.log('response is');
-        console.log(crowdEntriesOfAVideo);
+        console.log(questionsOfAVideo);
       });
+     }
+     else if($routeParams.condition=='learnerSource'){
+      $scope.condition = 'learnerSource';
+      QueryService.query('GET', 'getLearnerSourceQuestionsOfAVideo/'+$routeParams.videoId, {}, {})
+      .then(function(ovocie) {
+        questionsOfAVideo = ovocie.data;
+        console.log('response is');
+        console.log(questionsOfAVideo);
+      });
+     }
+    
   }
 
 

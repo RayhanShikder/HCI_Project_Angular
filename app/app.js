@@ -68,7 +68,7 @@
         templateUrl: 'views/phase2.html'
       })
       .when('/final_page', {
-        templateUrl: 'views/final_page.html'
+        templateUrl: 'views/final_qual_page.html'
       })
       .otherwise({
         redirectTo: '/'

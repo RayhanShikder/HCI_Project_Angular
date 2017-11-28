@@ -27,7 +27,7 @@
 </div>
 
 
-<div class="row">
+<div class="row" ng-if="condition=='vidSplit'">
 	<div class="col-md-2"></div>
 	<div class="col-md-8 text-center" ng-if="showQuestionDivFlag" style="border-style: inset;
     border-width: 1px;"> 
@@ -137,6 +137,36 @@
 		<br/>
 	</div>
 	<br>
+</div>
+
+
+
+<div class="row" ng-if="condition=='learnerSource'">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 text-center" ng-if="showQuestionDivFlag" style="border-style: inset;
+    border-width: 1px;"> 
+
+    	<div>
+			<strong> {{currentQuestionEdit.question}}</strong>	
+		</div>
+		<br>
+		<form>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-8 text-center">
+					<input type="text" name="" placeholder="Type you answer here" ng-model="learnerSourceQuestionAnswer.answer">
+				</div>
+			</div>
+			
+			<br>
+			<div>
+				<button class="btn btn-sm btn-success" ng-click="submitAnswer()" ng-disabled="learnerSourceQuestionAnswer.answer==''">Submit</button>
+				<button class="btn btn-sm btn-primary" ng-click="skipAnswer()">Skip</button>
+			</div>
+		</form>
+
+	</div>
+		
 </div>
 
 
