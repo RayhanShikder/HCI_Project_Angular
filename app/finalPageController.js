@@ -39,6 +39,7 @@
             type: self.FinalQuestions[i].type,
             condition: self.FinalQuestions[i].condition,
             question_type: self.FinalQuestions[i].question_type,
+            question: self.FinalQuestions[i].question,
             accuracy: -1,
             text_answer: self.FinalQuestions[i].users_answer,
             total_time_taken_to_answer: 111,
