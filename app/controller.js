@@ -31,6 +31,8 @@
       condition2:''
     };
 
+    $window.localStorage.clear();
+
     self.low=10;
     self.high=100;
     
@@ -74,11 +76,22 @@
       }
     ];
 
+
+
+
+    var completedUserCount = 0;
     QueryService.query('GET', 'users', {}, {})
       .then(function(resp) {
         console.log('user successfully retrieved. response is:');
         console.log(resp);
-        $window.localStorage['selectedFlow'] = angular.toJson(self.flow[resp.data.length%4]);
+
+        for(let i=0;i<resp.data.length;i++){
+          if(resp.data[i].creation_status && resp.data[i].creation_status == 'completed'){
+            completedUserCount++;
+          }
+        }
+        
+        $window.localStorage['selectedFlow'] = angular.toJson(self.flow[completedUserCount%4]);
         self.user.video1 = angular.fromJson($window.localStorage['selectedFlow']).video1;
         self.user.condition1 = angular.fromJson($window.localStorage['selectedFlow']).condition1;
         self.user.video2 = angular.fromJson($window.localStorage['selectedFlow']).video2;

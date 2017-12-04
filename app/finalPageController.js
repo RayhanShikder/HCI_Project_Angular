@@ -19,12 +19,19 @@
     // 'controller as' syntax
     var self = this;
     self.FinalQuestions = {};
-
+    var currentUser = {};
     var loadFinalQuestions = function(){
 
         QueryService.query('GET', 'questions/Any/Both/Final', {}, {})
         .then(function(ovocie) {
           self.FinalQuestions = ovocie.data;
+          console.log('response is');
+          console.log(ovocie.data);
+        });
+
+        QueryService.query('GET', 'users/'+$window.localStorage['user_id'], {}, {})
+        .then(function(ovocie) {
+          currentUser = ovocie.data[0];
           console.log('response is');
           console.log(ovocie.data);
         });
@@ -54,7 +61,16 @@
             console.log('response is');
             console.log(ovocie.data);
           });
-          $scope.goToThanksPage();
+
+          currentUser.creation_status = 'completed';
+           QueryService.query('PUT', 'users/'+$window.localStorage['user_id'], {}, currentUser)
+          .then(function(ovocie) {
+            console.log('response is');
+            console.log(ovocie.data);
+            $scope.goToThanksPage();
+          });
+
+          
       }
        
       
