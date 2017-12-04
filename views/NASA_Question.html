@@ -1,0 +1,445 @@
+<div ng-controller="phase1QuestionQualController as vm">
+<!-- <h3 class="text-center">VidSplit</h3> -->
+<!-- <strong>NASATLX questions for {{vm.currentPhase}}</strong> -->
+
+<div class="row">
+	<div class="col-md-12 text-right">
+		<!-- <button class="btn btn-sm btn-primary" ng-click="goToQuant()">Next</button> -->
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2">
+		
+	</div>
+	<div class="col-md-9 text-center">
+		<div ng-repeat="qstns in vm.NASAQuestionsOfAVideo" ng-if="vm.view == 'firstView'">
+			<br>
+			<div class="row">
+				<strong>{{$index+1}}. {{qstns.question}}</strong>
+			</div>
+			<div class="row">
+				<div id="slidecontainer">
+				  
+				  <div class="row">
+				  	<div class="col-md-2"></div>
+				  	<div class="col-md-4 text-right">Your Answer:</div>
+				  	<div class="col-md-4 text-left" ng-if="qstns.users_answer"><strong>{{qstns.users_answer}}</strong></div>
+				  	<div class="col-md-4 text-left" ng-if="!qstns.users_answer"><p style="color: red;">Not Given</p></div>
+				  	
+				  </div>
+				  
+				  <div class="row">
+				  	<div class="col-md-2">
+				  		<strong>0</strong> (Very Low)
+				  	</div>
+				  	<div class="col-md-8">
+				  		<input type="range" min="0" max="100" ng-model="qstns.users_answer" class="slider" id="myRange" step="1">
+				  	</div>
+				  	<div class="col-md-2">
+				  		<strong>100</strong> (Very High)
+				  	</div>
+				  	
+				  </div>
+				  
+				</div>
+			</div>
+		</div>
+		<div class="row text-center" ng-if="vm.view == 'firstView'">
+
+			<button class="btn btn-sm btn-primary" ng-click="vm.gotoComparison()" ng-disabled="!vm.NASAQuestionsOfAVideo[0].users_answer || !vm.NASAQuestionsOfAVideo[1].users_answer || !vm.NASAQuestionsOfAVideo[2].users_answer || !vm.NASAQuestionsOfAVideo[3].users_answer || !vm.NASAQuestionsOfAVideo[4].users_answer || !vm.NASAQuestionsOfAVideo[5].users_answer">Next</button>
+			<!-- <button class="btn btn-sm btn-primary" ng-click="vm.gotoComparison()" >Next</button> -->
+
+		</div>
+		<br>
+		<div id="radioQuestionsDiv" class="row text-center" ng-if="vm.view == 'comparison'" style="margin-top:70px; font-size: 15px;">
+			<div ng-if="vm.selectedComarison == 0">
+				<div class="row">
+					<p><b>1.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[0]" value="Performance">
+					    Performance
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[0]" value="Temporal Demand">
+					    Temporal Demand
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 1">
+				<div class="row">
+					<p><b>2.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[1]" value="Physical Demand">
+					    Physical Demand		
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[1]" value="Performance">
+					    Permformance
+					 </label>
+				</div>
+			</div>
+			<div  ng-if="vm.selectedComarison == 2">
+				<div class="row">
+					<p><b>3.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[2]" value="Physical Demand">
+					    Physical Demand
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[2]" value="Temporal Demand">
+					    Temporal Demand
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 3">
+				<div class="row">
+					<p><b>4.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[3]" value="Frustration">
+					    Frustration
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[3]" value="Effort">
+					    Effort
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 4">
+				<div class="row">
+					<p><b>5.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[4]" value="Physical Demand">
+					    Physical Demand
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[4]" value="Frustration">
+					    Frustration
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 5">
+				<div class="row">
+					<p><b>6.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[5]" value="Mental Demand">
+					    Mental Demand
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[5]" value="Effort">
+					    Effort
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 6">
+				<div class="row">
+					<p><b>7.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[6]" value="Mental Demand">
+					    Mental Demand
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[6]" value="Physical Demand">
+					    Physical Demand
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 7">
+				<div class="row">
+					<p><b>8.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[7]" value="Frustration">
+					    Frustration
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[7]" value="Mental Demand">
+					    Mental Demand
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 8">
+				<div class="row">
+					<p><b>9.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[8]" value="Temporal Demand">
+					    Temporal Demand
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[8]" value="Effort">
+					    Effort
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 9">
+				<div class="row">
+					<p><b>10.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[9]" value="Performance">
+					    Performance
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[9]" value="Frustration">
+					    Frustration
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 10">
+				<div class="row">
+					<p><b>11.</b> Choose one of the factors that represents the<b> more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[10]" value="Temporal Demand">
+					    Temporal Demand
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[10]" value="Mental Demand">
+					    Mental Demand
+					 </label>
+				</div>
+			</div>
+		
+			<div ng-if="vm.selectedComarison == 11">
+				<div class="row">
+					<p><b>12.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[11]" value="Performance">
+					    Performance
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[11]" value="Mental Demand">
+					    Mental Demand
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 12">
+				<div class="row">
+					<p><b>13.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[12]" value="Temporal Demand">
+					    Temporal Demand
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[12]" value="Frustration">
+					    Frustration
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 13">
+				<div class="row">
+					<p><b>14.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[13]" value="Effort">
+					    Effort
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[13]" value="Performance">
+					    Performance
+					 </label>
+				</div>
+			</div>
+			
+			<div ng-if="vm.selectedComarison == 14">
+				<div class="row">
+					<p><b>15.</b> Choose one of the factors that represents the <b>more important contributor</b> to workload for the task you have performed:</p>
+				</div>
+				<br>
+				<div class="row">
+					<label>
+					    <input type="radio" ng-model="vm.radioChoices[14]" value="Effort">
+					    Effort
+					 </label>
+					 &nbsp;
+					 <label>
+					    <input type="radio" ng-model="vm.radioChoices[14]" value="Physical Demand">
+					    Physical Demand
+					 </label>
+				</div>
+			</div>
+			<br>
+
+		</div>
+		
+		<div id="bottom" class="row text-center" ng-if="vm.view == 'comparison'">
+			<button class="btn btn-sm btn-primary" ng-click="vm.goToNextComparisonQuestion()" ng-disabled="vm.radioChoices[vm.selectedComarison].selected == ''" ng-if="vm.selectedComarison<14">Next</button>
+			<div  ng-if="vm.selectedComarison==14">
+				<p>In the next section, we will ask you some questions to measure how much you learned form the tutorial.</p>
+				<strong>Finish and go to the next section</strong>
+				<button class="btn btn-sm btn-primary" ng-click="vm.goToNextComparisonQuestion()" ng-disabled="vm.radioChoices[vm.selectedComarison].selected == ''">Finish</button>
+			</div>
+			
+			
+		</div>
+		<br><br>
+		<div style="margin-top: 100px; padding: 10px;  border: 2px;  border-style: dotted;"  ng-if="vm.view == 'comparison'">
+			<div><b>Hints</b></div>
+			<br>
+			<div class="row">
+				<div class="col-md-3 text-left">
+					<b>Physical Demand:</b>
+				</div>
+				<div class="col-md-8 text-left">
+					This refers to how much physical activity was required to complete the task.
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-3 text-left">
+					<b>Temporal Demand:</b>
+				</div>
+				<div class="col-md-8 text-left">
+					This refers to how much time pressure you felt due to the rate or pace of which the tasks or task elements occured.
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-3 text-left">
+					<b>Mental Demand:</b>
+				</div>
+				<div class="col-md-8 text-left">
+					This refers to how much mental and perceptual activity waws required to complete tha task.
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-3 text-left">
+					<b>Frustration:</b>
+				</div>
+				<div class="col-md-8 text-left">
+					This refers to how discouraged, stressed, or annoyed did you feel during the task.
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-3 text-left">
+					<b>Performance:</b>
+				</div>
+				<div class="col-md-8 text-left">
+					This refers to how satisfied were you with your performance in accomplishing the task.
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-3 text-left">
+					<b>Effort:</b>
+				</div>
+				<div class="col-md-8 text-left">
+					This refers to how hard did you have to work (metally & physically) to accomplish your level of performance.
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+<style>
+#slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+</style>

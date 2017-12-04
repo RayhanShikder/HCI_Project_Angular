@@ -29,6 +29,13 @@
     $scope.learnerSourceQuestionAnswer = {
       answer:''
     };
+    $scope.endedFlag = false;
+    $window.localStorage['correct'] = 0;
+
+    var currentIndex = -1;
+    $scope.video_number = $routeParams.phase == 'phase1'?1:2;
+    $scope.screen_height = screen.height;
+    var startTime = null;
     // var timeFlags = [ //later save it in localstorage
     //   {
     //     "time":12,
@@ -46,10 +53,10 @@
       videoId:$routeParams.id,
       startSeconds:5.00,
       end:8,
-      height:'100%',
+      height: ($scope.screen_height*5)/10,
       width:'100%',
       playerVars:{rel: 0
-        
+         // "controls" : 0
       } // all parameters supported by youtube-iframe-api
     };
     
@@ -57,6 +64,13 @@
         type: ''
       };
       
+
+
+    $scope.goToNASATLX = function(){
+      console.log('insided go to nasa func');
+      // $window.localStorage['time_in_video'] = Date.now() - startTime;
+      $location.path('/Qual/'+$routeParams.videoId+'/'+$routeParams.condition+'/'+$routeParams.phase+'/'+0);
+    };
 
     $scope.ytPlayer;
 
@@ -67,12 +81,29 @@
         function updateTime() {
         var oldTime = videotime;
         if($scope.ytPlayer['myYoutubePlayer'] && $scope.ytPlayer['myYoutubePlayer'].getCurrentTime()) {
+          if($scope.ytPlayer['myYoutubePlayer'].getCurrentTime() >0 && !startTime){//to start recording timing
+            startTime = Date.now();
+            console.log('startTime is:');
+            console.log(startTime);
+          }
           videotime = $scope.ytPlayer['myYoutubePlayer'].getCurrentTime();
+
+          if($scope.ytPlayer['myYoutubePlayer'].getCurrentTime() == $scope.ytPlayer['myYoutubePlayer'].getDuration() && !$scope.endedFlag){
+            $scope.ytPlayer['myYoutubePlayer'].destroy();
+            console.log('ended');
+            $window.localStorage['time_in_video'] = Date.now() - startTime;
+            $scope.$apply(function () { 
+             $scope.endedFlag = true;
+            });
+            
+          }
         }
         if(videotime !== oldTime) {
           onProgress(videotime);
         }
       }
+      console.log('title is:');
+      console.log($scope.ytPlayer['myYoutubePlayer']);
       timeupdater = setInterval(updateTime, 100);
     });
 
@@ -97,6 +128,7 @@
     var getCurrentQuestion = function(time){
       for(var i=0;i<questionsOfAVideo.length;i++){
         if(time == questionsOfAVideo[i].time){
+          currentIndex = i;
           return questionsOfAVideo[i];
         }
       }
@@ -115,7 +147,7 @@
     $scope.submitAnswer = function(){
       $scope.showQuestionDivFlag = false;
       setShownFlag(currentQuestionTime);
-      $scope.seekToVideo(currentQuestionTime); 
+      $scope.seekToVideo(currentQuestionTime-3); 
       if($routeParams.condition == 'vidSplit'){
         updateVerification($scope.currentQuestion,$scope.answer.type);
         $scope.answer = {
@@ -126,13 +158,21 @@
         submitLearnerSourceAnswer($scope.currentQuestion,$scope.learnerSourceQuestionAnswer.answer);
         $scope.learnerSourceQuestionAnswer.answer = '';
       }
+
+      if($routeParams.id == 'XySEe4uNsCY' && currentIndex == questionsOfAVideo.length-1){//second video ends before total length
+          $scope.ytPlayer['myYoutubePlayer'].destroy();
+          $scope.endedFlag = true;
+        
+        $window.localStorage['time_in_video'] = Date.now() - startTime;
+        // $scope.goToNASATLX();
+      }
       
       
     };
     $scope.skipAnswer = function(){
       $scope.showQuestionDivFlag = false;
       setShownFlag(currentQuestionTime);
-      $scope.seekToVideo(currentQuestionTime); 
+      $scope.seekToVideo(currentQuestionTime-3); 
       $scope.answer = {
         type: ''
       };
@@ -292,9 +332,6 @@
       });
     };
 
-    $scope.goToQuant = function(){
-      $location.path('/Quant/vidSplit/adsasdlkjfas/'+$routeParams.phase)
-    };
 
 
     ////////////  function definitions

@@ -18,16 +18,53 @@
 
     // 'controller as' syntax
     var self = this;
+    self.FinalQuestions = {};
 
-    $scope.goToPhase2 = function(){
+    var loadFinalQuestions = function(){
 
-      if($routeParams.phase == 'phase1'){
-        $location.path('/parent_phase/FMiCOx95lAc/adsasdlkjfas/phase2/learnerSourcing');  
-     }
-     else{//go to final page
-        // $location.path('/parent_phase/FMiCOx95lAc/adsasdlkjfas/phase2/learnerSourcing');  
-     }
+        QueryService.query('GET', 'questions/Any/Both/Final', {}, {})
+        .then(function(ovocie) {
+          self.FinalQuestions = ovocie.data;
+          console.log('response is');
+          console.log(ovocie.data);
+        });
+    };
+    loadFinalQuestions();
+
+    self.submitAnswer = function(){
+      for(let i=0;i<self.FinalQuestions.length;i++){
+
+        let param = {
+            video_id: self.FinalQuestions[i].video_id,
+            type: self.FinalQuestions[i].type,
+            condition: self.FinalQuestions[i].condition,
+            question_type: self.FinalQuestions[i].question_type,
+            accuracy: -1,
+            text_answer: self.FinalQuestions[i].users_answer,
+            total_time_taken_to_answer: 111,
+            total_time_taken_in_video: 1212,
+            user_id: $window.localStorage['user_id']
+          };
+          if(self.FinalQuestions[i].question_type == 'likert'){
+            param.accuracy = self.FinalQuestions[i].users_answer;
+          }
+          QueryService.query('POST', 'answer_summaries/', {}, param)
+          .then(function(ovocie) {
+            console.log('response is');
+            console.log(ovocie.data);
+          });
+          $scope.goToThanksPage();
+      }
+       
       
+    };
+
+    $scope.goToThanksPage = function(){
+        $location.path('/thank_you');  
+    };
+
+    self.checkAll = function(){
+      return false;
     };
 
 

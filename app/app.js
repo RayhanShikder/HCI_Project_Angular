@@ -17,7 +17,7 @@
    */
   angular
     .module('boilerplate', [
-      'ngRoute','ngYoutube'
+      'ngRoute','ngYoutube','ui.slider'
       //,
       // 'ui-router'
     ])
@@ -58,17 +58,20 @@
       .when('/parent_phase/:id/:videoId/:phase/:condition', {
         templateUrl: 'views/parent_phase.html'
       })
-      .when('/Quant/:type/:videoId/:phase', {
-        templateUrl: 'views/phase1QuestionQuant.html',
+      .when('/Quant/:video_id/:condition/:phase/:ques_id', {
+        templateUrl: 'views/Quant_Question.html',
       })
-      .when('/Qual/:type/:videoId/:phase', {
-        templateUrl: 'views/phase1QuestionQual.html'
+      .when('/Qual/:video_id/:condition/:phase/:ques_id', {
+        templateUrl: 'views/NASA_Question.html'
       })
       .when('/phase2/:youtubeId/:videoId/:phase', {
         templateUrl: 'views/phase2.html'
       })
       .when('/final_page', {
         templateUrl: 'views/final_qual_page.html'
+      })
+      .when('/thank_you', {
+        templateUrl: 'views/thank_you.html'
       })
       .otherwise({
         redirectTo: '/'

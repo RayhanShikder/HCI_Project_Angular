@@ -19,15 +19,73 @@
     // 'controller as' syntax
     var self = this;
     self.user = {
-      age: '',
-      sex: '',
+      age: null,
+      sex: null,
       profession: '',
-      macchinLearningKnowledgeLevel:'',
-      highestDegreeAchieved:'',
-      major:''
+      macchinLearningKnowledgeLevel: null,
+      highestDegreeAchieved:null,
+      major:null,
+      video1:'',
+      condition1:'',
+      video2:'',
+      condition2:''
     };
-    
 
+    self.low=10;
+    self.high=100;
+    
+    var video1 = '59ffbc081a22b8372a9fca4a';
+    var url1 = 'FMiCOx95lAc';
+    var video2 = '59fff599ef77ff41f89dc5ee';
+    var url2 = 'XySEe4uNsCY';
+
+    self.flow = [
+      {
+        "video1":video1,
+        "url1": url1,
+        "condition1":'vidSplit',
+        "video2":video2,
+        "url2": url2,
+        "condition2":'learnerSource'
+      },
+      {
+        "video1":video1,
+        "url1":url1,
+        "condition1":'learnerSource',
+        "video2":video2,
+        "url2": url2,
+        "condition2":'vidSplit'
+      },
+      {
+        "video1":video2,
+        "url1":url2,
+        "condition1":'vidSplit',
+        "video2":video1,
+        "url2": url1,
+        "condition2":'learnerSource'
+      },
+      {
+        "video1":video2,
+        "url1": url2,
+        "condition1":'learnerSource',
+        "video2":video1,
+        "url2": url1,
+        "condition2":'vidSplit'
+      }
+    ];
+
+    QueryService.query('GET', 'users', {}, {})
+      .then(function(resp) {
+        console.log('user successfully retrieved. response is:');
+        console.log(resp);
+        $window.localStorage['selectedFlow'] = angular.toJson(self.flow[resp.data.length%4]);
+        self.user.video1 = angular.fromJson($window.localStorage['selectedFlow']).video1;
+        self.user.condition1 = angular.fromJson($window.localStorage['selectedFlow']).condition1;
+        self.user.video2 = angular.fromJson($window.localStorage['selectedFlow']).video2;
+        self.user.condition2 = angular.fromJson($window.localStorage['selectedFlow']).condition2;
+        console.log('user is');
+        console.log(self.user);
+      });
    
    self.createUser = function(){
     console.log('inside createUser');
@@ -37,7 +95,7 @@
         console.log('user successfully created. response is:');
         console.log(resp);
         $window.localStorage['user_id']=resp.data._id;
-        $location.path('/parent_phase/FMiCOx95lAc/59ffbc081a22b8372a9fca4a/phase1/vidSplit')
+        $location.path('/parent_phase/'+angular.fromJson($window.localStorage['selectedFlow']).url1+'/'+angular.fromJson($window.localStorage['selectedFlow']).video1+'/phase1/'+angular.fromJson($window.localStorage['selectedFlow']).condition1);
       });
    };
 

@@ -1,21 +1,28 @@
-<h2 class="text-center">Video List</h2>
+<h2 class="text-center"></h2>
+<div class="text-center">
+    <strong class="text-center" style="font-size: 20px;">Please, provide the following information and proceed to the survey</strong>    
+</div>
 
-<!-- slider directive -->
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                     
                 </div>
                 <div class="col-md-8">
                     <form ng-submit="main.createUser()">
                         <div class="row">
                             <div class="col-md-4 text-right" style="padding-top:5px;">
-                                <strong >Age:</strong>
+                                <strong >Age<span style="color: red;">*</span>:</strong>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" type="number" name="" ng-model="main.user.age" required="">
@@ -23,7 +30,7 @@
                         </div>
                          <div class="row">
                             <div class="col-md-4 text-right" style="padding-top:5px;">
-                                <strong >Sex:</strong>
+                                <strong >Sex<span style="color: red;">*</span>:</strong>
                             </div>
                             <div class="col-md-8">
                                 <select class="form-control" id="sel1" ng-model="main.user.sex" required="">
@@ -35,56 +42,60 @@
                         <br>
                         <div class="row">
                             <div class="col-md-4 text-right" style="padding-top:5px;">
-                                <strong >Profession:</strong>
+                                <strong >Profession<span style="color: red;">*</span>:</strong>
                             </div>
                             <div class="col-md-8">
                                 <select class="form-control" id="sel1" ng-model="main.user.profession" required="">
                                     <option value="Student">Student</option>
                                     <option value="Engineer">Engineer</option>
+                                    <option value="Other">Other</option>
                               </select>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4 text-right" style="padding-top:5px;">
-                                <strong >Degree Achived:</strong>
+                                <strong >Degree Achived<span style="color: red;">*</span>:</strong>
                             </div>
                             <div class="col-md-8">
                                 <select class="form-control" id="sel1" ng-model="main.user.highestDegreeAchieved" required="">
                                     <option value="Bachelor">Bachelor</option>
                                     <option value="Masters">Masters</option>
+                                    <option value="Other">Other</option>
                               </select>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4 text-right" style="padding-top:5px;">
-                                <strong >Major:</strong>
+                                <strong >Major<span style="color: red;">*</span>:</strong>
                             </div>
                             <div class="col-md-8">
                                 <select class="form-control" id="sel1" ng-model="main.user.major" required="">
                                     <option value="Computer Science">Computer Science</option>
                                     <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Other">Other</option>
                               </select>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4 text-right" style="padding-top:5px;">
-                                <strong >Machine Learning Knowledge:</strong>
+                                <strong >Machine Learning Knowledge<span style="color: red;">*</span>:</strong>
                             </div>
                             <div class="col-md-8">
                                 <select class="form-control" id="sel1" ng-model="main.user.macchinLearningKnowledgeLevel" required="">
                                     <option value="Beginner">Beginner</option>
                                     <option value="Good">Good</option>
                                     <option value="Excellent">Excellent</option>
+                                    <option value="Other">Other</option>
                               </select>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <button class="btn btn-primary" type="submit">Next</button>
+                                <button class="btn btn-primary" type="submit" ng-disabled="!main.user.macchinLearningKnowledgeLevel || !main.user.major || !main.user.highestDegreeAchieved || !main.user.sex || !main.user.age">Next</button>
                             </div>
                         </div>
                     </form>
@@ -92,12 +103,12 @@
                 
             </div>
             <br><br>
-             <table class="table table-bordered">
+             <!-- <table class="table table-bordered">
                 <thead>
                     <tr>
                         <td>id</td>
                         <td>Name</td>
-                        <!-- <td>URL</td> -->
+                        
                     </tr>
                     
                 </thead>
@@ -106,15 +117,14 @@
                         <tr ng-repeat="video in main.ovocie">
                         <td>{{video.id}}</td>
                         <td><a ng-href="#/parent_phase/{{video.url}}/{{video._id}}/phase1/vidSplit">{{video.name}}</a></td>
-                        <!-- <td><a ng-href="#/singleVideo/59ffbc081a22b8372a9fca4a">{{video.url}}</a></td> -->
-                        <!-- <td><a ng-href="#/singleVideo/{{video.url}}/{{video._id}}">{{video.url}}</a></td> -->
+                        
                         </tr>
                     </div>
                     
                    
 
                 </tbody>
-            </table> 
+            </table>  -->
         </div>
         
     </div>

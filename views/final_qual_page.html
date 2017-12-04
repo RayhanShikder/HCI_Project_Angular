@@ -1,9 +1,102 @@
-<div ng-controller="finalPageController">
-<h3 class="text-center">VidSplit</h3>
-<strong>Final Qual Page</strong>
-<div class="row">
+<div ng-controller="finalPageController as vm">
+<!-- <h3 class="text-center">VidSplit</h3> -->
+<!-- <strong>Final Qual Page</strong> -->
+<div class="row" style="margin-top: 100px;">
 	<div class="col-md-12 text-center">
 		<!-- <button class="btn btn-primary" ng-click="goToPhase2()">Next</button> -->
+		<div ng-repeat="qstns in vm.FinalQuestions" >
+			<br>
+			<div class="row">
+				<strong>{{$index+1}}. {{qstns.question}}</strong>
+			</div>
+			<div ng-if="qstns.question_type == 'likert'">
+				<div class="row">
+					<div id="slidecontainer">
+					  
+					  
+					  <!-- <p>Your Answer:{{qstns.users_answer?qstns.users_answer:' Not Given'}}</p> -->
+					  <div class="row">
+					  	<div class="col-md-2"></div>
+					  	<div class="col-md-4 text-right">Your Answer:</div>
+					  	<div class="col-md-4 text-left" ng-if="qstns.users_answer"><strong>{{qstns.users_answer}}</strong></div>
+					  	<div class="col-md-4 text-left" ng-if="!qstns.users_answer"><p style="color: red;">Not Given</p></div>
+
+					  </div>
+					  <div class="row">
+					  	<div class="col-md-2 text-right">
+					  		<strong>1</strong> (Very Low)
+					  	</div>
+					  	<div class="col-md-8">
+					  		<input type="range" min="1" max="10" ng-model="qstns.users_answer" class="slider" id="myRange" step="1">
+					  	</div>
+					  	<div class="col-md-2 text-left">
+					  		<strong>10</strong> (Very High)
+					  	</div>
+					  	
+					  </div>
+					  
+					</div>
+				</div>
+			</div>
+			<div ng-if="qstns.question_type != 'likert'">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<textarea row="5" ng-model="qstns.users_answer"></textarea>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+		<br>
+		<div class="text-center">
+			<button class="btn btn-sm btn-primary" ng-click="vm.submitAnswer()" ng-disabled="!vm.FinalQuestions[0].users_answer || !vm.FinalQuestions[1].users_answer">Finish</button>
+		</div>
 	</div>
 </div>
 </div>
+
+
+
+
+
+<style>
+#slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+</style>

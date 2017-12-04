@@ -1,0 +1,50 @@
+<div ng-controller="phase1QuestionQuantController as vm">
+<!-- <h3 class="text-center">VidSplit</h3> -->
+<!-- <strong>Quantitative questions for {{vm.currentPhase}}</strong> -->
+<div class="row" style="margin-top: 100px;">
+	<div class="col-md-12 text-center" ng-if="vm.ques_completed">
+		<strong>Thanks for submitting your answers.</strong>
+		<strong ng-if="vm.currentPhase == 'phase1'">
+			Please, go to the next video tutorial.
+		</strong>
+		<strong ng-if="vm.currentPhase == 'phase2'">
+			In the next section, we will ask you some general questions. Please, go to the final questions page.
+		</strong>
+		
+		<br>
+		<br>
+		<button class="btn btn-sm btn-primary" ng-click="goToPhase2()">Next</button>
+	</div>
+	<br>
+	<br>
+	<div class="row" ng-if="!vm.ques_completed">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="text-center">
+				<div class="row">
+					<strong>{{(vm.currentQuantQuestionIndex+1)}}. {{vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].question}}</strong>
+				</div>
+				<div class="row">
+					
+					<form name="myForm" class="text-center" >
+					  <div ng-repeat="optn in vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].answer_options.split(',')">
+					  	<label>
+					    <input type="radio" ng-model="vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].users_answer" value="{{optn}}">
+					    {{optn}}
+					  </label>
+					  <br>
+					  </div>
+				 </form>
+				</div>
+				<br>
+				<div class="row text-center" >
+					<button class="btn btn-sm btn-success" ng-disabled="!vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].users_answer" ng-click="vm.submitAnswer(vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex],vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].users_answer)">Submit</button>
+					<!-- <button class="btn btn-sm btn-primary" ng-click="vm.goToNextQues()">Skip</button> -->
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+</div>
