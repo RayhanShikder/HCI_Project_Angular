@@ -31,11 +31,12 @@
     var startTime = null;
     if($routeParams.ques_id == 0 && !startTime){
       startTime = Date.now();
+      $window.localStorage['startTime'] = (Date.now()/1000);
     }
 
     var loadQuantQuestions = function(){
 
-        QueryService.query('GET', 'questions/'+$routeParams.video_id+'/'+$routeParams.condition+'/Quant', {}, {})
+        QueryService.query('GET', 'questions/'+$routeParams.video_id+'/Both/Quant', {}, {})
         .then(function(ovocie) {
           self.QuantQuestionsOfAVideo = ovocie.data;
           console.log('response is');
@@ -92,7 +93,7 @@
             condition: $routeParams.condition,
             question_type: ques.question_type,
             accuracy: calculated_accuracy,
-            total_time_taken_to_answer: Date.now() - startTime,
+            total_time_taken_to_answer: Date.now() - parseInt($window.localStorage['startTime'])*1000,
             total_time_taken_in_video: $window.localStorage['time_in_video'],
             user_id: $window.localStorage['user_id']
           };

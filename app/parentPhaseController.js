@@ -24,7 +24,7 @@
     var currentQuestionTime;
     var questionsOfAVideo;
     $scope.selectedSelection = "Tab";
-    $scope.agreedFlag = false;
+    $scope.agreedFlag = true;
     $scope.condition='';
     $scope.learnerSourceQuestionAnswer = {
       answer:''
@@ -158,8 +158,11 @@
         submitLearnerSourceAnswer($scope.currentQuestion,$scope.learnerSourceQuestionAnswer.answer);
         $scope.learnerSourceQuestionAnswer.answer = '';
       }
-
+      console.log('submitAnswer');
+      console.log(currentIndex);
+      console.log(questionsOfAVideo);
       if($routeParams.id == 'XySEe4uNsCY' && currentIndex == questionsOfAVideo.length-1){//second video ends before total length
+          console.log('last question');
           $scope.ytPlayer['myYoutubePlayer'].destroy();
           $scope.endedFlag = true;
         
@@ -348,6 +351,7 @@
         questionsOfAVideo = ovocie.data;
         console.log('response is');
         console.log(questionsOfAVideo);
+        questionsOfAVideo.sort(function(a,b) {return parseInt(a.time) - parseInt(b.time)});
       });
      }
      else if($routeParams.condition=='learnerSource'){
@@ -357,6 +361,7 @@
         questionsOfAVideo = ovocie.data;
         console.log('response is');
         console.log(questionsOfAVideo);
+        questionsOfAVideo.sort(function(a,b) {return parseInt(a.time) - parseInt(b.time)});
       });
      }
     

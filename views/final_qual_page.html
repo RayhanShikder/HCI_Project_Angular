@@ -39,10 +39,11 @@
 				</div>
 			</div>
 			<div ng-if="qstns.question_type != 'likert'">
+				<br>
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<textarea row="5" ng-model="qstns.users_answer"></textarea>
+						<textarea row="5" ng-model="qstns.users_answer" placeholder="Please type your answer here..."></textarea>
 					</div>
 					
 				</div>
@@ -51,7 +52,7 @@
 		</div>
 		<br>
 		<div class="text-center">
-			<button class="btn btn-sm btn-primary" ng-click="vm.submitAnswer()" ng-disabled="!vm.FinalQuestions[0].users_answer || !vm.FinalQuestions[1].users_answer">Finish</button>
+			<button class="btn btn-sm btn-primary" ng-click="vm.submitAnswer()" ng-disabled="!vm.FinalQuestions[0].users_answer || !vm.FinalQuestions[1].users_answer || !vm.FinalQuestions[2].users_answer || !vm.FinalQuestions[3].users_answer">Finish</button>
 		</div>
 	</div>
 </div>

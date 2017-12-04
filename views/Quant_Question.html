@@ -24,17 +24,23 @@
 				<div class="row">
 					<strong>{{(vm.currentQuantQuestionIndex+1)}}. {{vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].question}}</strong>
 				</div>
+				<br>
 				<div class="row">
+					<div class="col-md-4">
+						
+					</div>
+					<div class="col-md-8">
+						<form name="myForm" class="text-left" >
+							  <div ng-repeat="optn in vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].answer_options.split(',')">
+							  	<label>
+							    <input type="radio" ng-model="vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].users_answer" value="{{optn}}">
+							    {{optn}}
+							  </label>
+							  <br>
+							  </div>
+						 </form>
+					</div>
 					
-					<form name="myForm" class="text-center" >
-					  <div ng-repeat="optn in vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].answer_options.split(',')">
-					  	<label>
-					    <input type="radio" ng-model="vm.QuantQuestionsOfAVideo[vm.currentQuantQuestionIndex].users_answer" value="{{optn}}">
-					    {{optn}}
-					  </label>
-					  <br>
-					  </div>
-				 </form>
 				</div>
 				<br>
 				<div class="row text-center" >

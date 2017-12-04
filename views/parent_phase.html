@@ -37,7 +37,8 @@
     	<br>
 		<div>
 			<strong> Do you agree with the following statement?</strong>
-			<p>{{currentQuestion.selectName}} {{currentQuestion.selectType}} has beeen selected to {{currentQuestion.commentDescription}}</p>
+			<!-- <p>{{currentQuestion.selectName}} {{currentQuestion.selectType}} has beeen selected to -->
+			 <p>{{currentQuestion.commentDescription}}</p>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
@@ -62,7 +63,9 @@
 		</div>
 		<br>
 		<div class="row" ng-if="answer.type=='No' && !agreedFlag">
-			<p>Do you want to provide a better answer? <a href="" ng-click="setAgreed()">Yes</a></p>
+			<p>Do you want to provide a better answer? 
+				<!-- <a href="" ng-click="setAgreed()" style="color:blue;">Yes</a> -->
+			</p>
 
 		</div>
 		<div class="row" ng-if="answer.type=='No' && agreedFlag">
@@ -81,6 +84,7 @@
 						    <option value="Check List">Check List</option>
 						    <option value="Combo">Combo</option>
 						    <option value="Tab">Tab</option>
+						    <option value="Entry">Entry</option>
 						    <option value="Others">Others</option>
 						  </select>
 					</div>
