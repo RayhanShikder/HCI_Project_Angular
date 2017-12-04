@@ -11,10 +11,10 @@
     .module('boilerplate')
     .controller('MainController', MainController);
 
-  MainController.$inject = ['LocalStorage', 'QueryService','$scope','$location','$window'];
+  MainController.$inject = ['LocalStorage', 'QueryService','$scope','$location','$window','$routeParams'];
 
 
-  function MainController(LocalStorage, QueryService,$scope,$location,$window) {
+  function MainController(LocalStorage, QueryService,$scope,$location,$window,$routeParams) {
 
     // 'controller as' syntax
     var self = this;
@@ -77,28 +77,36 @@
     ];
 
 
+    console.log('routeparams');
+    console.log($routeParams);
+    $window.localStorage['selectedFlow'] = angular.toJson($routeParams);
+    self.user.video1 = angular.fromJson($window.localStorage['selectedFlow']).video1;
+    self.user.condition1 = angular.fromJson($window.localStorage['selectedFlow']).condition1;
+    self.user.video2 = angular.fromJson($window.localStorage['selectedFlow']).video2;
+    self.user.condition2 = angular.fromJson($window.localStorage['selectedFlow']).condition2;
+    console.log('user is');
+    console.log(self.user);
 
+    // var completedUserCount = 0;
+    // QueryService.query('GET', 'users', {}, {})
+    //   .then(function(resp) {
+    //     console.log('user successfully retrieved. response is:');
+    //     console.log(resp);
 
-    var completedUserCount = 0;
-    QueryService.query('GET', 'users', {}, {})
-      .then(function(resp) {
-        console.log('user successfully retrieved. response is:');
-        console.log(resp);
+    //     for(let i=0;i<resp.data.length;i++){
+    //       if(resp.data[i].creation_status && resp.data[i].creation_status == 'completed'){
+    //         completedUserCount++;
+    //       }
+    //     }
 
-        for(let i=0;i<resp.data.length;i++){
-          if(resp.data[i].creation_status && resp.data[i].creation_status == 'completed'){
-            completedUserCount++;
-          }
-        }
-        
-        $window.localStorage['selectedFlow'] = angular.toJson(self.flow[completedUserCount%4]);
-        self.user.video1 = angular.fromJson($window.localStorage['selectedFlow']).video1;
-        self.user.condition1 = angular.fromJson($window.localStorage['selectedFlow']).condition1;
-        self.user.video2 = angular.fromJson($window.localStorage['selectedFlow']).video2;
-        self.user.condition2 = angular.fromJson($window.localStorage['selectedFlow']).condition2;
-        console.log('user is');
-        console.log(self.user);
-      });
+    //     $window.localStorage['selectedFlow'] = angular.toJson(self.flow[completedUserCount%4]);
+    //     self.user.video1 = angular.fromJson($window.localStorage['selectedFlow']).video1;
+    //     self.user.condition1 = angular.fromJson($window.localStorage['selectedFlow']).condition1;
+    //     self.user.video2 = angular.fromJson($window.localStorage['selectedFlow']).video2;
+    //     self.user.condition2 = angular.fromJson($window.localStorage['selectedFlow']).condition2;
+    //     console.log('user is');
+    //     console.log(self.user);
+    //   });
    
    self.createUser = function(){
     console.log('inside createUser');

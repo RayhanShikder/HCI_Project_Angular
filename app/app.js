@@ -40,7 +40,7 @@
 
     //routes
     $routeProvider
-      .when('/', {
+      .when('/:video1/:url1/:condition1/:video2/:url2/:condition2', {
         templateUrl: 'views/home.html',
         controller: 'MainController',
         controllerAs: 'main'
